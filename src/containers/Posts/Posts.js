@@ -12,7 +12,8 @@ class Posts extends Component {
     }
     clickPostHandler = (postId) => {
         //this.setState({ selectedPostID: postId })
-        console.log(this.props)
+        //console.log(this.props, postId),
+        this.props.history.push('/' + postId);
     }
     componentDidMount() {
 
@@ -37,14 +38,13 @@ class Posts extends Component {
         let posts = <p style={{ textAlign: 'center' }}>Somthing went wrong</p>
         if (!this.state.error) {
             posts = this.state.posts.map(post => {
-                return (<Link key={post.id}
-                    to={'/' + post.id}
-                >
+                return (
                     <Post
+                        key={post.id}
                         title={post.title}
                         author={post.author}
                         clickPost={() => this.clickPostHandler(post.id)} />
-                </Link>)
+                )
             });
         }
         return (
