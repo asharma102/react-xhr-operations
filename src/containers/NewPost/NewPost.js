@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom'
 
 import './NewPost.css';
 
@@ -8,7 +9,8 @@ class NewPost extends Component {
         title: '',
         content: '',
         author: 'Max',
-        error: false
+        error: false,
+        submitted: false
     }
     postDataHandler = () => {
         const data = {
@@ -19,6 +21,7 @@ class NewPost extends Component {
         axios.post('/posts', data)
             .then(response => {
                 console.log(response);
+                this.setState({ submitted: true });
             }).catch(e => {// this is the catch section for getiing error in request
                 //console.log(e);
                 this.setState({ error: true });
@@ -26,8 +29,11 @@ class NewPost extends Component {
     }
 
     render() {
+        let redirect = this.state.submitted ? <Redirect to="/Posts" /> : null
+
         return (
             <div className="NewPost">
+                {redirect}
                 <h1>Add a Post</h1>
                 <label>Title</label>
                 <input type="text" value={this.state.title} onChange={(event) => this.setState({ title: event.target.value })} />

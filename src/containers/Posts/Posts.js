@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 import axios from '../../axios';
 import Post from '../../components/Post/Post';
+import FullPost from '../FullPost/FullPost';
 import './Posts.css';
 
 class Posts extends Component {
@@ -13,7 +14,7 @@ class Posts extends Component {
     clickPostHandler = (postId) => {
         //this.setState({ selectedPostID: postId })
         //console.log(this.props, postId),
-        this.props.history.push('/' + postId);
+        this.props.history.push('/posts/' + postId);
     }
     componentDidMount() {
 
@@ -48,9 +49,13 @@ class Posts extends Component {
             });
         }
         return (
-            <section className="Posts">
-                {posts}
-            </section>
+            <div>
+                <section className="Posts">
+                    {posts}
+                </section>
+                <Route path="/posts/:id" exact component={FullPost} />
+            </div>
+
         );
     }
 }
