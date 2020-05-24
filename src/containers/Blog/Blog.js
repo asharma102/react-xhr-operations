@@ -39,6 +39,10 @@ class Blog extends Component {
                     <Route path="/new-post" exact component={NewPost} />
                     <Route path="/posts" component={Posts} />
                     <Redirect from="/" to="/posts" />
+                    {/* 1st way to handel unknown route  it will autpmetic move to "/" "*/}
+                    {/* <Redirect from="/" to="/posts" /> */}
+                    {/* 2nd way to handel unknown route or 404 page  */}
+                    {/* <Route render={() => <h1>page not found</h1>} /> */}
                 </switch>
 
             </div>
